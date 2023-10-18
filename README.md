@@ -10,3 +10,4 @@ Searching:
 
 Sorting:
 - merge sort
+- quick sort
