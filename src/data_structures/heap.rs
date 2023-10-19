@@ -50,10 +50,12 @@ impl<T> Heap<T> {
 
         while  self.is_valid_idx(left_idx) {
             smaller_child = {
-                if (self.comparator)(&self.items[current_idx], &self.items[left_idx]) {
+                if (self.comparator)(&self.items[left_idx], 
+                                     &self.items[current_idx]) {
                     left_idx
                 } else if self.is_valid_idx(right_idx) 
-                    && (self.comparator)(&self.items[current_idx], &self.items[right_idx]) {
+                    && (self.comparator)(&self.items[right_idx], 
+                                         &self.items[current_idx]) {
                     right_idx
                 } else { 
                     // none of children is smaller, heap property updated
@@ -99,7 +101,7 @@ impl<T: Ord> Heap<T> {
     }
 
     pub fn new_max() -> Heap<T> {
-        Heap::new(|x, y| y > x)
+        Heap::new(|x, y| x > y)
     }
 }
 
