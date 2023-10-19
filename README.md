@@ -9,6 +9,9 @@ This repo is aiming to:
 Data structures:
 - heap
 
+Greedy:
+- Interval scheduling
+
 Searching:
 - binary search
 
