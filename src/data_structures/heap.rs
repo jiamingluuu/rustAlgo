@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 pub struct Heap<T> {
     items: Vec<T>,
     comparator: fn(&T, &T) -> bool,
@@ -51,9 +52,11 @@ impl<T> Heap<T> {
             smaller_child = {
                 if (self.comparator)(&self.items[current_idx], &self.items[left_idx]) {
                     left_idx
-                } else if (self.comparator)(&self.items[current_idx], &self.items[right_idx]) {
+                } else if self.is_valid_idx(right_idx) 
+                    && (self.comparator)(&self.items[current_idx], &self.items[right_idx]) {
                     right_idx
-                } else { // none of children is smaller, heap property updated
+                } else { 
+                    // none of children is smaller, heap property updated
                     break;
                 }
             };
@@ -116,12 +119,17 @@ mod tests {
         heap.push(2);
         heap.push(9);
         heap.push(11);
+        println!("\nheap: {:?}\n", heap.items);
         assert_eq!(heap.len(), 4);
         assert_eq!(heap.pop(), Some(2));
+        println!("\nheap: {:?}\n", heap.items);
         assert_eq!(heap.pop(), Some(4));
+        println!("\nheap: {:?}\n", heap.items);
         assert_eq!(heap.pop(), Some(9));
+        println!("\nheap: {:?}\n", heap.items);
         heap.push(1);
         assert_eq!(heap.pop(), Some(1));
+        println!("\nheap: {:?}\n", heap.items);
     }
 
     #[test]
@@ -132,10 +140,15 @@ mod tests {
         heap.push(9);
         heap.push(11);
         assert_eq!(heap.len(), 4);
+        println!("\nheap: {:?}\n", heap.items);
         assert_eq!(heap.pop(), Some(11));
+        println!("\nheap: {:?}\n", heap.items);
         assert_eq!(heap.pop(), Some(9));
+        println!("\nheap: {:?}\n", heap.items);
         assert_eq!(heap.pop(), Some(4));
+        println!("\nheap: {:?}\n", heap.items);
         heap.push(1);
+        println!("\nheap: {:?}\n", heap.items);
         assert_eq!(heap.pop(), Some(2));
     }
 
