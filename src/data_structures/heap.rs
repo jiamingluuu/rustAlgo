@@ -168,29 +168,4 @@ mod tests {
         heap.push(Point(50, 34));
         assert_eq!(heap.pop().unwrap().0, 3);
     }
-
-    // #[test]
-    // fn test_iter_heap() {
-    //     let mut heap = Heap::new_min();
-    //     heap.push(4);
-    //     heap.push(2);
-    //     heap.push(9);
-    //     heap.push(11);
-
-    //     // test iterator, which is not in order except the first one.
-    //     let mut iter = heap.iter();
-    //     assert_eq!(iter.next(), Some(&2));
-    //     assert_ne!(iter.next(), None);
-    //     assert_ne!(iter.next(), None);
-    //     assert_ne!(iter.next(), None);
-    //     assert_eq!(iter.next(), None);
-
-    //     // test the heap after run iterator.
-    //     assert_eq!(heap.len(), 4);
-    //     assert_eq!(heap.pop(), Some(2));
-    //     assert_eq!(heap.pop(), Some(4));
-    //     assert_eq!(heap.pop(), Some(9));
-    //     assert_eq!(heap.pop(), Some(11));
-    //     assert_eq!(heap.pop(), None);
-    // }
 }

@@ -14,7 +14,7 @@
  *          = 4cn + 15cn + cn
  *          = 20cn
  */
-pub fn deterministic_select<T: Ord + Copy>(arr: &Vec<T>, k: usize) -> T {
+pub fn deterministic_select<T: Ord + Copy>(arr: &[T], k: usize) -> T {
     // if arr.len() < 50 {
     //     let mut arr_copy = arr;
     //     arr_copy.sort();

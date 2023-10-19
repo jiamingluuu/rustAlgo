@@ -7,14 +7,15 @@ This repo is aiming to:
 
 ## Included algorithm
 Data structures:
-- heap
+- Heap
 
 Greedy:
 - Interval scheduling
 
 Searching:
-- binary search
+- Binary search
+- Deterministic select
 
 Sorting:
-- merge sort
-- quick sort
+- Merge sort
+- Quick sort

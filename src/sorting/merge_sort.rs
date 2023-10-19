@@ -43,9 +43,7 @@ fn merge_sort<T: Ord + Copy>(arr: &mut [T], l: usize, r: usize) -> () {
 }
 
 pub fn sort<T: Ord + Copy>(arr: &mut [T]) {
-     if arr.is_empty() {
-         return;
-     }
+     if arr.is_empty() { return; }
 
     let n = arr.len();
     merge_sort(arr, 0, n-1);
