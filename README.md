@@ -6,7 +6,11 @@ This repo is aiming to:
 2. let me get familiar with Rust syntax.
 
 ## Included algorithm
+Data structures:
+- heap
+
 Searching:
+- binary search
 
 Sorting:
 - merge sort
