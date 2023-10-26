@@ -63,21 +63,21 @@ impl<T: Ord> AVL_Node<T> {
     }
     
     pub fn insert(root: &mut Option<Box<AVL_Node<T>>>, value: T) -> bool {
-        if let Some(node) = root {
-            let inserted = match node.value.cmp(&value) {
-                Ordering::Equal => return false,
-                Ordering::Greater => Self::insert(&mut node.left, value),
-                Ordering::Less => Self::insert(&mut node.right, value),
-            };
-            
-            if inserted {
-                todo!()
-            }
-
-        } else {
-            
+        if root.is_none() {
+            *root = Some(Self::new(value));
+            return true;
         }
-        true
+
+        let mut node = root.unwrap();
+        let inserted = match node.value.cmp(&value) {
+            Ordering::Equal => return false,
+            Ordering::Greater => Self::insert(&mut node.left, value),
+            Ordering::Less => Self::insert(&mut node.right, value),
+        };
+        
+        if inserted { node.rebalance(); }
+
+        inserted
     }
     
     pub fn remove(&mut self, value: T) -> bool {
@@ -86,12 +86,24 @@ impl<T: Ord> AVL_Node<T> {
 
     fn rebalance(&mut self) {
         let balance_factor = self.balance_factor();
-        self = match balance_factor {
-            -2 => todo!(),
-            2 => todo!(),
-            _ => todo!(),
-        };
-        todo!()
+        if balance_factor > 1 {
+            let left = *self.left.unwrap();
+
+            if (Self::height(left.left) >= Self::height(left.right)) {
+                self.left_rotation();
+            } else {
+                self.left_right_rotation();
+            }
+
+        } else if balance_factor < 1 {
+            let right = *self.right.unwrap();
+            
+            if (Self::height(right.right) >= Self::height(right.left)) {
+                self.right_rotation();
+            } else {
+                self.right_left_rotation();
+            }
+        }
     }
     
     fn balance_factor(&self) -> i8 {
@@ -167,5 +179,12 @@ impl<T: Ord> AVL_Node<T> {
         };
 
         self.height = 1 + max(left_height, right_height);
+    }
+    
+    fn height(node: Option<Box<AVL_Node<T>>>) -> usize {
+        match node {
+            Some(node) => node.height,
+            None => 0,
+        }
     }
 }
